@@ -7,6 +7,7 @@ interface UseShortcutOptions {
   allowInput?: boolean;
   anyKey?: boolean;
   node?: null;
+  excludeKeys?: (string | number)[];
 }
 
 /// https://devtrium.com/posts/how-keyboard-shortcut
@@ -18,6 +19,7 @@ export const useShortcut = (
     allowInput: false,
     anyKey: false,
     node: null,
+    excludeKeys: [],
   },
 ) => {
   // implement the callback ref pattern
@@ -54,6 +56,10 @@ export const useShortcut = (
             event.target instanceof HTMLTextAreaElement)
         )
           return;
+
+        if (opts.excludeKeys && opts.excludeKeys.includes(event.key)) {
+          return;
+        }
 
         event.preventDefault();
         callbackRef.current(event);

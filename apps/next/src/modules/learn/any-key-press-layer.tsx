@@ -5,6 +5,7 @@ export const AnyKeyPressLayer = ({ onSubmit }: { onSubmit: () => void }) => {
     ctrlKey: false,
     anyKey: true,
     allowInput: true,
+    excludeKeys: ['0']
   });
   return null;
 };

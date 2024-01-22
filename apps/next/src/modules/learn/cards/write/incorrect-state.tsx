@@ -9,6 +9,7 @@ import { GenericLabel } from "@quenti/components";
 import type { Question } from "@quenti/interfaces";
 import { getRandom } from "@quenti/lib/array";
 import { api } from "@quenti/trpc";
+import { useShortcut } from "@quenti/lib/hooks/use-shortcut";
 
 import { Button, Flex, Stack } from "@chakra-ui/react";
 
@@ -65,6 +66,11 @@ export const IncorrectState: React.FC<IncorrectStateProps> = ({
       incorrectCount: active.term.incorrectCount,
     });
   };
+
+  useShortcut(["0"], handleOverrideCorrect, {
+    ctrlKey: false,
+    allowInput: true,
+  });
 
   React.useEffect(() => {
     setTimeout(() => {
